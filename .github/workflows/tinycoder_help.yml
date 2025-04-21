@@ -10,8 +10,13 @@ jobs:
     # Only run if the label added is 'tinycoder'
     if: github.event.label.name == 'tinycoder'
     runs-on: ubuntu-latest
+    permissions:
+      issues: write # Needed to comment on the issue
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -22,3 +27,15 @@ jobs:
 
     - name: Run TinyCoder help
       run: tinycoder --help
+
+    - name: Echo event context
+      run: |
+        echo "Issue Event Context:"
+        cat $GITHUB_EVENT_PATH
+
+    - name: Post comment to issue
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ISSUE_NUMBER: ${{ github.event.issue.number }}
+        GH_REPO: ${{ github.repository }}
+      run: gh issue comment $ISSUE_NUMBER --repo $GH_REPO --body "Hello world!"
