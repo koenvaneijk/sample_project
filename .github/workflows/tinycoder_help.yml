@@ -50,7 +50,7 @@ jobs:
       run: tinycoder --code "${{ github.event.issue.body }}"
 
     - name: Push changes
-      run: git push origin ${{ steps.create_branch.outputs.BRANCH_NAME }}
+      run: git push --force origin ${{ steps.create_branch.outputs.BRANCH_NAME }}
 
     - name: Create Pull Request
       env:
