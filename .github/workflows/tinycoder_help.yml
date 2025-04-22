@@ -45,6 +45,8 @@ jobs:
     - name: Run TinyCoder (assuming it commits changes)
       # Pass necessary info like issue body, number, etc. if needed
       # Example: tinycoder --issue-body "${{ github.event.issue.body }}"
+      env:
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       run: tinycoder --code "${{ github.event.issue.body }}"
 
     - name: Push changes
