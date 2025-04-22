@@ -1,7 +1,7 @@
 import string
 
 def print_alphabet():
-    """Prints all lowercase letters of the English alphabet."""
+    """Imprime todas las letras minúsculas del alfabeto inglés."""
     print(string.ascii_lowercase)
 
 if __name__ == "__main__":
